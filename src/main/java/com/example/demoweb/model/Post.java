@@ -1,20 +1,33 @@
 package com.example.demoweb.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
+import java.util.Random;
+import javax.persistence.Id;
 
-public class Post {
-    private final Long id;
+@Entity
+public class Post implements Serializable {
+
+    @Id
+    @GeneratedValue
+    private Long id;
     private String text;
-    private Integer likes;
-    private final Date creationDate;
+    private Date creationDate;
+    private int likes;
 
-    public Post(Long id, String text, Integer likes) {
+    public Post(Long id, String text) {
         this.id = id;
         this.text = text;
-        this.creationDate = new Date();
-        this.likes = likes;
+        creationDate = new Date();
+        likes = Math.abs(new Random().nextInt(100));
     }
+
+    public Post() {
+
+    }
+
     public Long getId() {
         return id;
     }

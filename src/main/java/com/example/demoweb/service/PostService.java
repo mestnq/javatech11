@@ -1,6 +1,8 @@
 package com.example.demoweb.service;
 
 import com.example.demoweb.model.Post;
+import com.example.demoweb.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,21 +12,15 @@ import java.util.Random;
 
 @Service
 public class PostService {
-    ArrayList<Post> postArrayList = new ArrayList<>();
+    @Autowired
+    PostRepository postRepository;
 
-    public PostService() {
-        String[] texts = new String[]{"HELP...", "CAN U HELP ME?", "OH MY GOD."};
-        for (String text : texts) {
-            postArrayList.add(new Post((long) postArrayList.size(), text + ", id = " + (long) postArrayList.size(), Math.abs(new Random().nextInt(100))));
-        }
-    }
-
-    public ArrayList<Post> listAllPosts() {
-        return postArrayList;
+    public Iterable<Post> listAllPosts() {
+        return postRepository.findAll();
     }
 
     public void create(String text) {
-        Post post = new Post((long) postArrayList.size(), text, Math.abs(new Random().nextInt(100)));
-        postArrayList.add(post);
+        Post post = new Post(null, text);
+        postRepository.save(post);
     }
 }
