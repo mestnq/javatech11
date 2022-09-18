@@ -10,17 +10,21 @@ import java.util.Random;
 
 @Service
 public class PostService {
-    ArrayList<Post> postArrayList = new ArrayList<>(Arrays.asList(
-            new Post("HELP...", new Date()),
-            new Post("CAN U HELP ME", new Date()),
-            new Post("OH MY GOD.", new Date())));
+    ArrayList<Post> postArrayList = new ArrayList<>();
+
+    public PostService() {
+        String[] texts = new String[]{"HELP...", "CAN U HELP ME?", "OH MY GOD."};
+        for (String text : texts) {
+            postArrayList.add(new Post((long) postArrayList.size(), text + ", id = " + (long) postArrayList.size(), Math.abs(new Random().nextInt(100))));
+        }
+    }
 
     public ArrayList<Post> listAllPosts() {
         return postArrayList;
     }
 
     public void create(String text) {
-        Post post = new Post(text, new Date());
+        Post post = new Post((long) postArrayList.size(), text, Math.abs(new Random().nextInt(100)));
         postArrayList.add(post);
     }
 }

@@ -1,16 +1,24 @@
 package com.example.demoweb.model;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class Post {
+    private final Long id;
     private String text;
     private Integer likes;
-    private Date creationDate;
+    private final Date creationDate;
 
-    public Post(String text, Date creationDate) {
+    public Post(Long id, String text, Integer likes) {
+        this.id = id;
         this.text = text;
-        this.creationDate = creationDate;
+        this.creationDate = new Date();
+        this.likes = likes;
     }
+    public Long getId() {
+        return id;
+    }
+
     public Date getCreationDate() {
         return creationDate;
     }

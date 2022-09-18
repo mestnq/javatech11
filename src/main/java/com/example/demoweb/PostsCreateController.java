@@ -13,16 +13,22 @@ public class PostsCreateController {
     @Autowired
     PostService postsService;
 
-    @RequestMapping(path = "/new", method = RequestMethod.GET)
-    public String create(Model model){
-        model.addAttribute("appName", "Аааааааааааааааааа");
-        model.addAttribute("posts", postsService.listAllPosts());
-        return "create";
-    }
+    //@RequestMapping(path = "/new", method = RequestMethod.GET)
+    //public String create(Model model){
+    //    model.addAttribute("appName", "Аааааааааааааааааа");
+    //    model.addAttribute("posts", postsService.listAllPosts());
+    //    return "create";
+    //}
 
     @RequestMapping(path = "/new", method = RequestMethod.POST)
     public String doCreate(@ModelAttribute("text") String text){
         postsService.create(text);
         return "redirect:/";
     }
+
+    @RequestMapping(path = "/new", method = RequestMethod.GET)
+    public String create() {
+        return "create";
+    }
+
 }
